@@ -18,7 +18,7 @@ namespace ThetaMessager.Forms
     {
         private Form parent;
 
-        private String configPath=Application.StartupPath+"\\Config\\application-env.xml";
+        private static String configPath=Application.StartupPath+"\\Config\\application-env.xml";
 
         private static String userNameTag="UserName";
 
@@ -42,11 +42,13 @@ namespace ThetaMessager.Forms
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(configPath);
-            try{
+            try
+            {
                 userName=doc.GetElementsByTagName(userNameTag).Item(0).InnerText;
                 password=doc.GetElementsByTagName(passwordTag).Item(0).InnerText;
                 userInfoNeeded = Boolean.Parse(doc.GetElementsByTagName(userInfoNeededTag).Item(0).InnerText);
-            }catch(Exception ex){
+            }catch(Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }

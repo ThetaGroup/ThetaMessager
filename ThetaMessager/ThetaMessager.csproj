@@ -51,6 +51,9 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Widget\NodeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ComUtils.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -92,6 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\application-env.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\map-info.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\bpin.png">

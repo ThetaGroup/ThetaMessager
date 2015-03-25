@@ -2774,25 +2774,7 @@
     <value>130, 17</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bpin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\bpin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CCAD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\ccad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="gpin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\gpin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="opin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\opin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rpin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\rpin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rpng" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\rpng.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ypin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\ypin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
