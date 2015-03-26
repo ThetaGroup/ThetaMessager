@@ -52,6 +52,9 @@
             this.textBoxNodeNumber = new System.Windows.Forms.TextBox();
             this.cmStripMapEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvForSendings = new System.Windows.Forms.DataGridView();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbControlMap)).BeginInit();
             this.menuStrip.SuspendLayout();
@@ -60,6 +63,7 @@
             this.tpMapEdit.SuspendLayout();
             this.panelMapEditEditor.SuspendLayout();
             this.cmStripMapEdit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvForSendings)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -165,6 +169,7 @@
             // 
             // tpControl
             // 
+            this.tpControl.Controls.Add(this.dgvForSendings);
             this.tpControl.Controls.Add(this.pbControlMap);
             this.tpControl.Location = new System.Drawing.Point(4, 22);
             this.tpControl.Name = "tpControl";
@@ -265,6 +270,33 @@
             this.cmiAdd.Text = "新增节点";
             this.cmiAdd.Click += new System.EventHandler(this.cmiAdd_Click);
             // 
+            // dgvForSendings
+            // 
+            this.dgvForSendings.AllowUserToResizeColumns = false;
+            this.dgvForSendings.AllowUserToResizeRows = false;
+            this.dgvForSendings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvForSendings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.colNumber});
+            this.dgvForSendings.Location = new System.Drawing.Point(603, 7);
+            this.dgvForSendings.Name = "dgvForSendings";
+            this.dgvForSendings.RowHeadersVisible = false;
+            this.dgvForSendings.RowTemplate.Height = 23;
+            this.dgvForSendings.Size = new System.Drawing.Size(203, 150);
+            this.dgvForSendings.TabIndex = 1;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "节点名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colNumber
+            // 
+            this.colNumber.HeaderText = "节点号码";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -293,6 +325,7 @@
             this.panelMapEditEditor.ResumeLayout(false);
             this.panelMapEditEditor.PerformLayout();
             this.cmStripMapEdit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvForSendings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,6 +355,9 @@
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.TextBox textBoxNodeName;
         private System.Windows.Forms.TextBox textBoxNodeNumber;
+        private System.Windows.Forms.DataGridView dgvForSendings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
 
     }
 }

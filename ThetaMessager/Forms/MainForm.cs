@@ -15,12 +15,14 @@ using ThetaMessager.Forms;
 using System.Resources;
 using ThetaMessager.Forms.Widget;
 using System.Xml;
+using ThetaMessager.Commons;
 
 namespace ThetaMessager
 {
     public partial class MainForm : Form
     {
         private static string GREEN_PIN = "gpin";
+        private static string ORANGE_PIN = "opin";
 
         private XmlDocument doc = null;
         private static String nodeConfigPath = Application.StartupPath + "\\Config\\map-info.xml";
@@ -32,9 +34,12 @@ namespace ThetaMessager
         private static String nodeLocationYProp = "locationY";        
 
         private LoginForm loginForm=null;
-        private List<NodeButton> nodeButtonList = null;
-        private NodeButton currentNodeButton = null;
-        private Image image = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREEN_PIN)));
+        private List<NodeButton> editNodeButtonList = null;        
+        private NodeButton editCurrentNodeButton = null;
+        private List<NodeButton> controlNodeButtonList = null;
+        private NodeButton controlCurrentNodeButton = null;
+        private Image gpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREEN_PIN)));
+        private Image opinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(ORANGE_PIN)));
 
         private string portName = "COM3";
         private int baudRate = 9600;
@@ -52,7 +57,8 @@ namespace ThetaMessager
 
         private void InitNodeButtonList()
         {
-            this.nodeButtonList = new List<NodeButton>();
+            this.editNodeButtonList = new List<NodeButton>();
+            this.controlNodeButtonList = new List<NodeButton>();
             doc = new XmlDocument();
             doc.Load(nodeConfigPath);
             try
@@ -65,7 +71,7 @@ namespace ThetaMessager
                     int locationY = int.Parse(node.Attributes[nodeLocationYProp].Value);
                     Point point = new Point(locationX, locationY);
 
-                    NodeButton nodeButton = new NodeButton(point, image, btNode_Click);
+                    NodeButton nodeButton = new NodeButton(point, gpinImage, btEditNode_Click);
                     nodeButton.setInfo(name, number, point);
                     this.addNodeButton(nodeButton);
                 }
@@ -122,33 +128,73 @@ namespace ThetaMessager
         private void cmiAdd_Click(object sender, EventArgs e)
         {
             Point location=new Point(locationX,locationY);            
-            NodeButton nodeButton = new NodeButton(location, image, btNode_Click);
+            NodeButton nodeButton = new NodeButton(location, gpinImage, btEditNode_Click);
             nodeButton.setInfo(null, null, location);
-            this.addNodeButton(nodeButton);                     
+            this.addNodeButton(nodeButton);                
         }
 
         private void addNodeButton(NodeButton nodeButton)
         {            
-            this.nodeButtonList.Add(nodeButton);
+            this.editNodeButtonList.Add(nodeButton);
             this.pbEditMap.Controls.Add(nodeButton);
+
+            NodeButton controlNodeButton = new NodeButton(nodeButton, btControlNode_Click);
+            this.controlNodeButtonList.Add(controlNodeButton);
+            this.pbControlMap.Controls.Add(controlNodeButton);  
         }
 
-        private void btNode_Click(object sender, EventArgs e)
+        private void removeNodeButton(NodeButton nodeButton)
+        {
+            this.editNodeButtonList.Remove(this.editCurrentNodeButton);
+            this.editCurrentNodeButton.Dispose();
+        }
+
+        private void btControlNode_Click(object sender, EventArgs e)
+        {
+            NodeButton button = (NodeButton)sender;
+            string nodeName = button.name;
+            string nodeNumber = button.number;
+            if (nodeName == null || nodeNumber == null)
+            {
+                MessageBox.Show(ErrorMessage.ERROR_NODE_HAS_NOT_BEEN_INITIALIZED);
+                return;
+            }
+            switch (button.selectedState)
+            {
+                case 0:
+                    button.selectedState = 1;
+                    button.Image = opinImage;
+                    this.dgvForSendings.Rows.Add(new string[2] { nodeName, nodeNumber });
+                    break;
+                case 1:
+                    button.selectedState = 0;
+                    button.Image = gpinImage;
+                    foreach (DataGridViewRow row in this.dgvForSendings.Rows)
+                    {
+                        if (row.Cells[0].Value.Equals(nodeName))
+                        {
+                            this.dgvForSendings.Rows.Remove(row);
+                            break;
+                        }
+                    };
+                    break;
+            }
+        }
+
+        private void btEditNode_Click(object sender, EventArgs e)
         {
             NodeButton button = (NodeButton)sender;
             
             this.textBoxNodeName.Text = button.name;
             this.textBoxNodeNumber.Text = button.number;
 
-            this.currentNodeButton = button;
+            this.editCurrentNodeButton = button;            
         }
 
         private void btDelete_Click(object sender, EventArgs e)
         {            
-            this.nodeButtonList.Remove(this.currentNodeButton);
             this.textBoxNodeName.Text = null;
             this.textBoxNodeNumber.Text = null;
-            this.currentNodeButton.Dispose();
             this.saveConfigs();
         }
 
@@ -156,16 +202,20 @@ namespace ThetaMessager
         {            
             string name = this.textBoxNodeName.Text;
             string number = this.textBoxNodeNumber.Text;
-            Point location = currentNodeButton.location;
-            currentNodeButton.setInfo(name, number, location);
+            Point location = editCurrentNodeButton.location;
+            editCurrentNodeButton.setInfo(name, number, location);
             this.saveConfigs();
+
+            int editIndex = this.editNodeButtonList.IndexOf(editCurrentNodeButton);
+            this.controlNodeButtonList[editIndex].name = name;
+            this.controlNodeButtonList[editIndex].number = number;
         }
 
         private void saveConfigs()
         {
             XmlNode mapNode = doc.GetElementsByTagName(mapTag)[0];
             mapNode.RemoveAll();
-            foreach (NodeButton nodeButton in this.nodeButtonList)
+            foreach (NodeButton nodeButton in this.editNodeButtonList)
             {
                 try
                 {
