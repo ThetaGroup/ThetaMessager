@@ -15,15 +15,25 @@ namespace TheataMessager
         private static string NEW_LINE = "\r\n";
         private static string SEND_CMD = "AT+CMGS=";
         private static string TEST_CMD = "AT+CMGF=1";
+        private static string LIST_CMD = "AT+CMGL=\"REC UNREAD\"";
+        private static string OK_RSP = "OK";
+        private static string ERROR_RSP = "ERROR";
+        private static string DETAIL_RSP = "\r\n>";
+        private static string LIST_SPLIT_TAG = "+CMGL";
 
         private static long receivedCount = 0;
-        private static StringBuilder builder = new StringBuilder();
+        public static StringBuilder builder = new StringBuilder();
 
         private static SerialPort com;
         private static Queue<SendInfo> sendQueue;
 
-        private static bool isInit = false;
-        private static bool isReady = true;
+        public static bool isInit = false;
+        public static bool isReady = true;
+
+        public static string[] searchPortNames()
+        {
+            return SerialPort.GetPortNames();
+        }
 
         public static void init(string portName, int baudRate)
         {
@@ -42,16 +52,24 @@ namespace TheataMessager
 
         private static void comDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            Thread.Sleep(500);
             int n = com.BytesToRead;
             byte[] buf = new byte[n];
             receivedCount += n;
             com.Read(buf, 0, n);
-            builder.Clear();
-            
-            builder.Append(Encoding.ASCII.GetString(buf));
-            string showLog = builder.ToString();
-            
-            isReady = true;
+
+            string received = Encoding.ASCII.GetString(buf);
+            string saved = builder.ToString();
+            if (saved.Contains(OK_RSP) || saved.Contains(ERROR_RSP)|| saved.Contains(DETAIL_RSP))
+            {
+                builder.Clear();
+            }
+            builder.Append(received);
+            string showLog = builder.ToString();      
+            if (received.Contains(OK_RSP) || received.Contains(ERROR_RSP)||received.Contains(DETAIL_RSP))
+            {                
+                isReady = true;
+            }                         
         }
 
         public static void send(SendInfo sendInfo)
@@ -86,12 +104,43 @@ namespace TheataMessager
 
         private static void tunnelWrite(string cmd)
         {
+            waitForReady();
+            com.WriteLine(cmd);
+            isReady = false;
+        }
+
+        public static string[] listReceivedMessages()
+        {
+            tunnelWrite(LIST_CMD);
+            waitForReady();
+            string receivedListString = builder.ToString();
+            string[] result = receivedListString.Split(new string[]{LIST_SPLIT_TAG},StringSplitOptions.RemoveEmptyEntries);
+            return result;
+        }
+
+        private static void waitForReady()
+        {
             while (!isReady)
             {
 
             }
-            com.WriteLine(cmd);
-            isReady = false;
+            Thread.Sleep(500);
+        }
+
+        public static bool testTunnel()
+        {
+            bool result = false;
+            tunnelWrite(TEST_CMD);
+            waitForReady();
+            if (builder.ToString().Contains(OK_RSP))
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+            return result;
         }
 
         public static void open()

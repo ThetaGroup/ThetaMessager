@@ -5,16 +5,37 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThetaMessager", "ThetaMessager\ThetaMessager.csproj", "{34BD8468-9181-4AC6-9817-A02942D1C970}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "ThetaMessagerSetup", "ThetaMessagerSetup\ThetaMessagerSetup.isproj", "{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{34BD8468-9181-4AC6-9817-A02942D1C970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34BD8468-9181-4AC6-9817-A02942D1C970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{34BD8468-9181-4AC6-9817-A02942D1C970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34BD8468-9181-4AC6-9817-A02942D1C970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{34BD8468-9181-4AC6-9817-A02942D1C970}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.Debug|Any CPU.ActiveCfg = DVD-5
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.Debug|Any CPU.Build.0 = DVD-5
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.DVD-5|Any CPU.Build.0 = DVD-5
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.Release|Any CPU.ActiveCfg = SingleImage
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.Release|Any CPU.Build.0 = SingleImage
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{F3BEE3E0-3808-40F4-BE6E-D836475BA17D}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

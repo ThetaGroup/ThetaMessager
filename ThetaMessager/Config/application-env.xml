@@ -5,4 +5,7 @@
     <Password>123456</Password>
     <UserInfoNeeded>false</UserInfoNeeded>
   </UserInfo>
+  <Commands>
+    <Command name="测试">Test</Command>
+  </Commands>
 </ThetaMessager>

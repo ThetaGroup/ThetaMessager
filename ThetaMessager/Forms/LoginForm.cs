@@ -31,6 +31,8 @@ namespace ThetaMessager.Forms
         private String password="ranger";
 
         private Boolean userInfoNeeded = true;
+        private static string SMALL_ICON = "logo32";
+        private Icon icon = ((System.Drawing.Icon)(new ComponentResourceManager(typeof(MainForm))).GetObject(SMALL_ICON));
 
         public LoginForm(Form parent)
         {
@@ -40,6 +42,8 @@ namespace ThetaMessager.Forms
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            this.Icon = icon;
+
             XmlDocument doc = new XmlDocument();
             doc.Load(configPath);
             try
