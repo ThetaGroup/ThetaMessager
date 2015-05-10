@@ -29,10 +29,15 @@ namespace ThetaMessager
 
         private XmlDocument nodeConfigDoc = null;
         private XmlDocument appConfigDoc = null;
+        private XmlDocument logDoc = null;
         private static String nodeConfigPath = Application.StartupPath + "\\Config\\map-info.xml";
         private static String appConfigPath = Application.StartupPath + "\\Config\\application-env.xml";
+        private static String logPath = Application.StartupPath + "\\Config\\log.xml";
         private static String commandTag = "Command";
         private static String commandNameProp = "name";
+        private static String logsTag = "logs";
+        private static String logTag = "log";
+        private static String logDateProp = "date";
         private static String mapTag = "map";
         private static String nodeTag = "node";
         private static String nodeNameProp = "name";
@@ -41,16 +46,22 @@ namespace ThetaMessager
         private static String nodeLocationYProp = "locationY";
         private static String OPEN_CALL_BACK_TAG = "opened";
 
+        private string nowDate = null;
+        private string logContent = "";
+        private XmlNode logNode = null;
         private Dictionary<string, string> cmdMap = null;
         private LoginForm loginForm=null;
         private List<NodeButton> editNodeButtonList = null;        
         private NodeButton editCurrentNodeButton = null;
         private List<NodeButton> controlNodeButtonList = null;
+        private List<bool> dgvStateList = null;
         private Image gpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREEN_PIN)));
         private Image opinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(ORANGE_PIN)));
         private Image rpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(RED_PIN)));
         private Image ypinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(YELLOW_PIN)));
         private Icon icon = ((System.Drawing.Icon)(new ComponentResourceManager(typeof(MainForm))).GetObject(SMALL_ICON));
+
+        private static string newLine = "\n";
 
         private static int baudRate = 9600;
 
@@ -72,6 +83,26 @@ namespace ThetaMessager
 
         private void InitComInfos()
         {
+            this.logDoc = new XmlDocument();           
+            this.logDoc.Load(logPath);
+            this.nowDate = DateTime.Now.ToShortDateString();
+            XmlNodeList logNodeList = this.logDoc.GetElementsByTagName(logTag);
+            foreach (XmlNode node in logNodeList){
+                XmlNode dateAttr=node.Attributes.GetNamedItem(logDateProp);
+                if (dateAttr.Value.Equals(this.nowDate))
+                {
+                    this.logNode = node;
+                }
+            }
+            if (this.logNode == null)
+            {
+                this.logNode = this.logDoc.CreateElement(logTag);
+                XmlAttribute dateAttr=this.logDoc.CreateAttribute(logDateProp);
+                dateAttr.Value=this.nowDate;
+                this.logNode.Attributes.Append(dateAttr);
+                this.logDoc.GetElementsByTagName(logsTag).Item(0).AppendChild(this.logNode);
+            }            
+
             this.btComSend.Enabled = false;
             this.btStateUpdate.Enabled = false;
             foreach (string portName in ComUtils.searchPortNames())
@@ -119,10 +150,18 @@ namespace ThetaMessager
 
         private void InitNodeButtonList()
         {
+            this.dgvForSendings.AllowUserToAddRows = false;
+            this.dgvForEdit.AllowUserToAddRows = false;                
+
             this.editNodeButtonList = new List<NodeButton>();
             this.controlNodeButtonList = new List<NodeButton>();
             nodeConfigDoc = new XmlDocument();
             nodeConfigDoc.Load(nodeConfigPath);
+            this.dgvForEdit.Rows.Clear();
+            this.dgvForSendings.Rows.Clear();
+            bool isFirst = true;
+            this.dgvStateList = new List<bool>();
+                        
             try
             {
                 XmlNodeList nodeList = nodeConfigDoc.GetElementsByTagName(nodeTag);
@@ -137,9 +176,13 @@ namespace ThetaMessager
                     nodeButton.setInfo(name, number, point);
                     this.addNodeButton(nodeButton);
 
-                    this.dgvForEdit.Rows.Add(new string[2]{name,number});
-                }
-
+                    this.dgvStateList.Add(false);
+                   
+                    this.dgvForEdit.Rows.Add(new string[2] { name, number });
+                    this.dgvForSendings.Rows.Add(new object[3] { 0, name, number });
+                    
+                }                
+                
             }
             catch (Exception ex)
             {
@@ -188,7 +231,7 @@ namespace ThetaMessager
 
             NodeButton controlNodeButton = new NodeButton(nodeButton, btControlNode_Click);
             this.controlNodeButtonList.Add(controlNodeButton);
-            this.pbControlMap.Controls.Add(controlNodeButton);  
+            this.pbControlMap.Controls.Add(controlNodeButton);            
         }
 
         private void removeNodeButton(NodeButton nodeButton)
@@ -212,17 +255,27 @@ namespace ThetaMessager
                 case 0:
                     button.selectedState = 1;
                     button.Image = opinImage;
-                    this.dgvForSendings.Rows.Add(new string[2] { nodeName, nodeNumber });
+                    foreach (DataGridViewRow row in this.dgvForSendings.Rows)
+                    {
+                        object value = row.Cells[1].Value;
+                        if (value != null && value.Equals(nodeName))
+                        {
+                            DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell.Value = true;
+                            break;
+                        }
+                    }
                     break;
                 case 1:
                     button.selectedState = 0;
                     button.Image = gpinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
-                        object value = row.Cells[0].Value;
+                        object value = row.Cells[1].Value;
                         if (value != null && value.Equals(nodeName)) 
                         {
-                            this.dgvForSendings.Rows.Remove(row);
+                            DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell.Value = false;
                             break;
                         }
                     };
@@ -232,10 +285,11 @@ namespace ThetaMessager
                     button.Image = opinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
-                        object value = row.Cells[0].Value;
+                        object value = row.Cells[1].Value;
                         if (value!=null && value.Equals(nodeName))
                         {
-                            this.dgvForSendings.Rows.Remove(row);
+                            DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell.Value = false;
                             break;
                         }
                     };
@@ -243,9 +297,30 @@ namespace ThetaMessager
                 case 3:
                     button.selectedState = 2;
                     button.Image = rpinImage;
-                    this.dgvForSendings.Rows.Add(new string[2] { nodeName, nodeNumber });
+                    foreach (DataGridViewRow row in this.dgvForSendings.Rows)
+                    {
+                        object value = row.Cells[1].Value;
+                        if (value != null && value.Equals(nodeName))
+                        {
+                            DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell.Value = true;
+                            break;
+                        }
+                    }
                     break;
                 case 4:
+                    button.selectedState = 0;
+                    button.Image = gpinImage;
+                    foreach(DataGridViewRow row in this.dgvForSendings.Rows)
+                    {
+                        object value = row.Cells[1].Value;
+                        if (value != null && value.Equals(nodeName))
+                        {
+                            DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell.Value = false;
+                            break;
+                        }
+                    }
                     break;
             }
         }
@@ -302,10 +377,17 @@ namespace ThetaMessager
         private void reloadEditDataGridView()
         {
             this.dgvForEdit.Rows.Clear();
+            this.dgvForSendings.Rows.Clear();            
+            this.dgvStateList.Clear();
+
             foreach (NodeButton nodeButton in this.editNodeButtonList)
             {
+                this.dgvStateList.Add(false);
+          
                 this.dgvForEdit.Rows.Add(new string[2] { nodeButton.name, nodeButton.number });
+                this.dgvForSendings.Rows.Add(new object[3] { 0, nodeButton.name, nodeButton.number });                
             }
+
         }
 
         private void btUpdate_Click(object sender, EventArgs e)
@@ -364,44 +446,64 @@ namespace ThetaMessager
 
         private void btComSend_Click(object sender, EventArgs e)
         {
-            this.btComSend.Enabled = false;
-            this.btStateUpdate.Enabled = false;
-            if (!this.checkSendParas())
+            try
             {
-                MessageBox.Show(ErrorMessage.ERROR_MESSAGE_SEND_INFO_IS_NOT_ENOUGH);
-            }
-            this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_START+this.dgvForSendings.Size);
-
-            string sendingText = this.cmdMap[this.cbSentText.Text];            
-            foreach (DataGridViewRow row in this.dgvForSendings.Rows){
-                if (row.Cells[1].Value== null)
+                this.btComSend.Enabled = false;
+                this.btStateUpdate.Enabled = false;
+                if (!this.checkSendParas())
                 {
-                    continue;
+                    MessageBox.Show(ErrorMessage.ERROR_MESSAGE_SEND_INFO_IS_NOT_ENOUGH);
                 }
-                string nowNo = row.Cells[1].Value.ToString();
-                string nowName = row.Cells[0].Value.ToString();
-                SendInfo sendInfo = new SendInfo(nowNo, sendingText);
+                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_START + (this.dgvForSendings.Rows.Count - 1));
+                log(AtProcess.COM_MESSAGE_QUEUE_START + (this.dgvForSendings.Rows.Count - 1));
 
-                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_SEND_START);
-                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_INFO_NAME+nowName);
-                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_INFO_CMD + this.cbSentText.Text);
-                ComUtils.send(sendInfo);
-                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_SEND_END);
-
-                foreach (NodeButton nodeButton in this.controlNodeButtonList)
+                string sendingText = this.cmdMap[this.cbSentText.Text];
+                foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                 {
-                    if (nodeButton.number.Equals(nowNo))
+                    if (row.Cells[1].Value == null)
                     {
-                        nodeButton.Image = this.ypinImage;
-                        nodeButton.selectedState = 4;
-                        break;
+                        continue;
+                    }
+                    if ((bool)row.Cells[0].FormattedValue == false)
+                    {
+                        continue;
+                    }
+                    string nowNo = row.Cells[2].Value.ToString();
+                    string nowName = row.Cells[1].Value.ToString();
+                    SendInfo sendInfo = new SendInfo(nowNo, sendingText);
+
+                    this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_SEND_START);
+                    log(AtProcess.COM_MESSAGE_SINGLE_SEND_START);
+                    this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_INFO_NAME + nowName);
+                    log(AtProcess.COM_MESSAGE_SINGLE_INFO_NAME + nowName);
+                    this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_INFO_CMD + this.cbSentText.Text);
+                    log(AtProcess.COM_MESSAGE_SINGLE_INFO_CMD + this.cbSentText.Text);
+                    ComUtils.send(sendInfo);
+                    this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_SINGLE_SEND_END);
+                    log(AtProcess.COM_MESSAGE_SINGLE_SEND_END);
+
+                    foreach (NodeButton nodeButton in this.controlNodeButtonList)
+                    {
+                        if (nodeButton.number.Equals(nowNo))
+                        {
+                            nodeButton.Image = this.ypinImage;
+                            nodeButton.selectedState = 4;
+                            break;
+                        }
                     }
                 }
-            }
-            this.btComSend.Enabled = true;
-            this.btStateUpdate.Enabled = true;
+                this.btComSend.Enabled = true;
+                this.btStateUpdate.Enabled = true;
 
-            this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_END);
+                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_END);                
+                log(AtProcess.COM_MESSAGE_QUEUE_END);
+                this.lbAtInfo.Items.Add(newLine);
+                log(newLine);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private bool checkSendParas()
@@ -411,21 +513,29 @@ namespace ThetaMessager
         }
 
         private void btOpenCom_Click(object sender, EventArgs e)
-        {
+        {            
             try
             {
                 if (!ComUtils.isInit)
                 {
                     this.lbAtInfo.Items.Add(AtProcess.COM_INIT);
+                    log(AtProcess.COM_INIT);
                     ComUtils.init(this.cbComPort.Text, baudRate);
                     this.lbAtInfo.Items.Add(AtProcess.COM_INIT_FINISH);
+                    log(AtProcess.COM_INIT_FINISH);
                 }
                 this.lbAtInfo.Items.Add(AtProcess.COM_OPEN);
+                log(AtProcess.COM_OPEN);
                 ComUtils.open();
                 this.lbAtInfo.Items.Add(AtProcess.COM_OPEN_FINISH);
+                log(AtProcess.COM_OPEN_FINISH);
                 this.lbAtInfo.Items.Add(AtProcess.COM_TEST);
+                log(AtProcess.COM_TEST);
                 bool tested=ComUtils.testTunnel();
                 this.lbAtInfo.Items.Add(AtProcess.COM_TEST_FINISH);
+                log(AtProcess.COM_TEST_FINISH);
+                this.lbAtInfo.Items.Add(newLine);
+                log(newLine);
                 if (tested)
                 {
                     MessageBox.Show(ErrorMessage.NORMAL_COM_PORT_OPEN_OK);
@@ -475,7 +585,77 @@ namespace ThetaMessager
             CommandForm commandForm = new CommandForm();
             commandForm.Show();
         }
-            
+
+        private void log(string str)
+        {
+            this.logContent += "[" + DateTime.Now.ToString() + "]" + str + "|";
+            this.logNode.InnerText = this.logContent;
+            this.logDoc.Save(logPath);
+        }
+
+        private void dtpLog_ValueChanged(object sender, EventArgs e)
+        {
+            this.showLog();
+        }
+
+        private void showLog()
+        {
+            string chosenDate = this.dtpLog.Value.ToShortDateString();
+            XmlNode nowLogNode = null;
+            foreach (XmlNode node in this.logDoc.GetElementsByTagName(logTag))
+            {
+                if (node.Attributes.GetNamedItem(logDateProp).Value.Equals(chosenDate))
+                {
+                    nowLogNode = node;
+                }
+            }
+            if (nowLogNode != null)
+            {
+                this.rtbLog.Text = nowLogNode.InnerText;
+                this.rtbLog.Text=this.rtbLog.Text.Replace("|", "\r\n");
+            }
+            else
+            {
+                this.rtbLog.Text = "";
+            }
+        }
+
+        private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.showLog();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ComUtils.Shutdown();
+        }
+
+        private void dgvForSendings_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                bool b = (bool)this.dgvForSendings.Rows[e.RowIndex].Cells[0].EditedFormattedValue;
+                bool remain = this.dgvStateList[e.RowIndex];
+
+                if (b != remain)
+                {
+                    string buttonName = this.dgvForSendings.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                    foreach (NodeButton node in this.controlNodeButtonList)
+                    {
+                        if (node.name.Equals(buttonName))
+                        {
+                            this.btControlNode_Click(node, new EventArgs());
+                            this.dgvStateList[e.RowIndex] = b;
+                            Thread.Sleep(100);
+                            break;
+                        }
+                    }
+                }
+       
+            }
+        }
+
     }
 }
 

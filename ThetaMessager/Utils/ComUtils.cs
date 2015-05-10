@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ThetaMessager.Commons;
 using ThetaMessager.Utils;
 
 namespace TheataMessager
@@ -22,13 +23,15 @@ namespace TheataMessager
         private static string LIST_SPLIT_TAG = "+CMGL";
 
         private static long receivedCount = 0;
+        private static int maxRetry = 1000;
         public static StringBuilder builder = new StringBuilder();
 
         private static SerialPort com;
         private static Queue<SendInfo> sendQueue;
-
+        
+        private static bool forceShutdown = false;
         public static bool isInit = false;
-        public static bool isReady = true;
+        public static bool isReady = true;        
 
         public static string[] searchPortNames()
         {
@@ -69,7 +72,7 @@ namespace TheataMessager
             if (received.Contains(OK_RSP) || received.Contains(ERROR_RSP)||received.Contains(DETAIL_RSP))
             {                
                 isReady = true;
-            }                         
+            }   
         }
 
         public static void send(SendInfo sendInfo)
@@ -79,7 +82,8 @@ namespace TheataMessager
 
         private static void checkSendQueue()
         {
-            while (true)
+            int count = 0;
+            while (!forceShutdown)
             {
                 if (sendQueue.Count == 0)
                 {
@@ -90,6 +94,7 @@ namespace TheataMessager
                     SendInfo sendInfo = sendQueue.Dequeue();
                     physicalSend(sendInfo);
                 }
+
             }
         }
 
@@ -120,11 +125,17 @@ namespace TheataMessager
 
         private static void waitForReady()
         {
-            while (!isReady)
+            int count = 0;
+            while (!isReady && !forceShutdown)
             {
 
             }
             Thread.Sleep(500);
+        }
+
+        public static void Shutdown()
+        {
+            forceShutdown = true;
         }
 
         public static bool testTunnel()

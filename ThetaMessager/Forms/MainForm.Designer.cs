@@ -37,6 +37,7 @@
             this.miUser = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miFunction = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCommand = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpControl = new System.Windows.Forms.TabPage();
             this.lbAtInfo = new System.Windows.Forms.ListBox();
@@ -48,6 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbComPort = new System.Windows.Forms.ComboBox();
             this.dgvForSendings = new System.Windows.Forms.DataGridView();
+            this.SelectState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpMapEdit = new System.Windows.Forms.TabPage();
@@ -61,9 +63,12 @@
             this.btUpdate = new System.Windows.Forms.Button();
             this.textBoxNodeName = new System.Windows.Forms.TextBox();
             this.textBoxNodeNumber = new System.Windows.Forms.TextBox();
+            this.tpLog = new System.Windows.Forms.TabPage();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpLog = new System.Windows.Forms.DateTimePicker();
             this.cmStripMapEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.miCommand = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbControlMap)).BeginInit();
             this.menuStrip.SuspendLayout();
@@ -73,6 +78,7 @@
             this.tpMapEdit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvForEdit)).BeginInit();
             this.panelMapEditEditor.SuspendLayout();
+            this.tpLog.SuspendLayout();
             this.cmStripMapEdit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,14 +127,14 @@
             // miUser
             // 
             this.miUser.Name = "miUser";
-            this.miUser.Size = new System.Drawing.Size(152, 22);
+            this.miUser.Size = new System.Drawing.Size(124, 22);
             this.miUser.Text = "用户管理";
             this.miUser.Click += new System.EventHandler(this.miUser_Click);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Size = new System.Drawing.Size(124, 22);
             this.miExit.Text = "退出系统";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -140,15 +146,24 @@
             this.miFunction.Size = new System.Drawing.Size(44, 21);
             this.miFunction.Text = "功能";
             // 
+            // miCommand
+            // 
+            this.miCommand.Name = "miCommand";
+            this.miCommand.Size = new System.Drawing.Size(124, 22);
+            this.miCommand.Text = "指令设置";
+            this.miCommand.Click += new System.EventHandler(this.miCommand_Click);
+            // 
             // tcMain
             // 
             this.tcMain.Controls.Add(this.tpControl);
             this.tcMain.Controls.Add(this.tpMapEdit);
+            this.tcMain.Controls.Add(this.tpLog);
             this.tcMain.Location = new System.Drawing.Point(12, 28);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
             this.tcMain.Size = new System.Drawing.Size(821, 465);
             this.tcMain.TabIndex = 7;
+            this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
             // tpControl
             // 
@@ -255,6 +270,7 @@
             this.dgvForSendings.BackgroundColor = System.Drawing.Color.White;
             this.dgvForSendings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvForSendings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SelectState,
             this.colName,
             this.colNumber});
             this.dgvForSendings.Location = new System.Drawing.Point(603, 7);
@@ -263,6 +279,14 @@
             this.dgvForSendings.RowTemplate.Height = 23;
             this.dgvForSendings.Size = new System.Drawing.Size(204, 150);
             this.dgvForSendings.TabIndex = 1;
+            this.dgvForSendings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvForSendings_CellContentClick);
+            // 
+            // SelectState
+            // 
+            this.SelectState.HeaderText = "全选";
+            this.SelectState.Name = "SelectState";
+            this.SelectState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelectState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colName
             // 
@@ -275,6 +299,7 @@
             this.colNumber.HeaderText = "终端号码";
             this.colNumber.Name = "colNumber";
             this.colNumber.ReadOnly = true;
+            this.colNumber.Visible = false;
             // 
             // tpMapEdit
             // 
@@ -378,6 +403,44 @@
             this.textBoxNodeNumber.Size = new System.Drawing.Size(126, 21);
             this.textBoxNodeNumber.TabIndex = 3;
             // 
+            // tpLog
+            // 
+            this.tpLog.Controls.Add(this.rtbLog);
+            this.tpLog.Controls.Add(this.label5);
+            this.tpLog.Controls.Add(this.dtpLog);
+            this.tpLog.Location = new System.Drawing.Point(4, 22);
+            this.tpLog.Name = "tpLog";
+            this.tpLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tpLog.Size = new System.Drawing.Size(813, 439);
+            this.tpLog.TabIndex = 2;
+            this.tpLog.Text = "系统日志";
+            this.tpLog.UseVisualStyleBackColor = true;
+            // 
+            // rtbLog
+            // 
+            this.rtbLog.Location = new System.Drawing.Point(8, 39);
+            this.rtbLog.Name = "rtbLog";
+            this.rtbLog.Size = new System.Drawing.Size(796, 392);
+            this.rtbLog.TabIndex = 2;
+            this.rtbLog.Text = "";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "日志日期";
+            // 
+            // dtpLog
+            // 
+            this.dtpLog.Location = new System.Drawing.Point(65, 6);
+            this.dtpLog.Name = "dtpLog";
+            this.dtpLog.Size = new System.Drawing.Size(200, 21);
+            this.dtpLog.TabIndex = 0;
+            this.dtpLog.ValueChanged += new System.EventHandler(this.dtpLog_ValueChanged);
+            // 
             // cmStripMapEdit
             // 
             this.cmStripMapEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -392,13 +455,6 @@
             this.cmiAdd.Text = "新增节点";
             this.cmiAdd.Click += new System.EventHandler(this.cmiAdd_Click);
             // 
-            // miCommand
-            // 
-            this.miCommand.Name = "miCommand";
-            this.miCommand.Size = new System.Drawing.Size(152, 22);
-            this.miCommand.Text = "指令设置";
-            this.miCommand.Click += new System.EventHandler(this.miCommand_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -407,9 +463,12 @@
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
+            this.MaximumSize = new System.Drawing.Size(848, 532);
+            this.MinimumSize = new System.Drawing.Size(848, 532);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "科右前旗人防智能终端控制系统";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbEditMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbControlMap)).EndInit();
@@ -424,6 +483,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvForEdit)).EndInit();
             this.panelMapEditEditor.ResumeLayout(false);
             this.panelMapEditEditor.PerformLayout();
+            this.tpLog.ResumeLayout(false);
+            this.tpLog.PerformLayout();
             this.cmStripMapEdit.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -459,13 +520,18 @@
         private System.Windows.Forms.Button btOpenCom;
         private System.Windows.Forms.Button btStateUpdate;
         private System.Windows.Forms.ListBox lbAtInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridView dgvForEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNameForEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumberForEdit;
         private System.Windows.Forms.ToolStripMenuItem miUser;
         private System.Windows.Forms.ToolStripMenuItem miCommand;
+        private System.Windows.Forms.TabPage tpLog;
+        private System.Windows.Forms.DateTimePicker dtpLog;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RichTextBox rtbLog;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SelectState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
 
     }
 }

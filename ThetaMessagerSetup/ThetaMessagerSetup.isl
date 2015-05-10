@@ -52,7 +52,7 @@
 	<summary>
 		<codepage>1252</codepage>
 		<title>Installation Database</title>
-		<subject/>
+		<subject></subject>
 		<author>##ID_STRING2##</author>
 		<keywords>Installer,MSI,Database</keywords>
 		<comments>Contact:  Your local administrator</comments>
@@ -343,8 +343,8 @@
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{223D1C8C-5115-47F0-A131-B89C46D58187}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{F2893520-B72C-4AF3-ABA0-99DC85B3850E}</td><td>CONFIG</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{1F85178B-1592-4C09-869B-1DF8110C2311}</td><td>RESOURCES</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ThetaMessager.exe</td><td>{C6E70430-8B53-4674-85B1-796AD4D93E9E}</td><td>INSTALLDIR</td><td>2</td><td/><td>thetamessager.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>ThetaMessager.vshost.exe</td><td>{A138814C-62F4-42AA-9450-637B97F93A6F}</td><td>INSTALLDIR</td><td>2</td><td/><td>thetamessager.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ThetaMessager.exe</td><td>{2314A9D4-4276-4141-A891-6AE6DC201E91}</td><td>INSTALLDIR</td><td>2</td><td/><td>thetamessager.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ThetaMessager.vshost.exe</td><td>{E4B94C4D-8072-46A0-A652-376B42C66C44}</td><td>INSTALLDIR</td><td>2</td><td/><td>thetamessager.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1889,6 +1889,7 @@
 		<row><td>bpin.png</td><td>ISX_DEFAULTCOMPONENT2</td><td>bpin.png</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\bpin.png</td><td>1</td><td/></row>
 		<row><td>ccad.png</td><td>ISX_DEFAULTCOMPONENT2</td><td>CCAD.png</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\CCAD.png</td><td>1</td><td/></row>
 		<row><td>gpin.png</td><td>ISX_DEFAULTCOMPONENT2</td><td>gpin.png</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\gpin.png</td><td>1</td><td/></row>
+		<row><td>log.xml</td><td>ISX_DEFAULTCOMPONENT1</td><td>log.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Config\log.xml</td><td>1</td><td/></row>
 		<row><td>logo128.ico</td><td>ISX_DEFAULTCOMPONENT2</td><td>logo128.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\logo128.ico</td><td>1</td><td/></row>
 		<row><td>logo32.ico</td><td>ISX_DEFAULTCOMPONENT2</td><td>logo32.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\logo32.ico</td><td>1</td><td/></row>
 		<row><td>logo64.ico</td><td>ISX_DEFAULTCOMPONENT2</td><td>logo64.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\Resources\logo64.ico</td><td>1</td><td/></row>
@@ -2053,8 +2054,8 @@
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_A94CAB9C_0CA4_4022_93D5_AA0936EC4F3C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_B25BFF49_92FF_4FB0_9EEF_79CF75EF4CF2_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_0FB13B8C_5B1E_41E3_BDCD_7FF6675F6104_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ThetaMessager.exe</td><td/><td/><td>_10FFDA07_A6AB_4212_B800_B7030A86538D_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>ThetaMessager.vshost.exe</td><td/><td/><td>_E6ABA7D6_F302_44BB_AA34_8687A2CB8958_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ThetaMessager.exe</td><td/><td/><td>_E0D24AC9_FBC9_46D3_9CC6_27497E1C9DDE_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ThetaMessager.vshost.exe</td><td/><td/><td>_9E4398B7_C73F_47AA_B22A_D68ABD446B30_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2671,7 +2672,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Nantong Yunjiang Mach.&amp;Elec.Making CROP.LTD</td><td>0</td><td/><td>841196800</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Nantong Yunjiang Mach.&amp;Elec.Making CROP.LTD</td><td>0</td><td/><td>-769448504</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35</td><td>1033</td><td>Microsoft .NET Framework 3.5 needs to be installed for this installation to continue.</td><td>0</td><td/><td>841184544</td></row>
@@ -3490,7 +3491,15 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>841182528</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME10</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>1520689216</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>841182528</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>-769407544</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>-769407544</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>-769410999</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>-769410999</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>-769398103</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME8</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>-769398103</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME9</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>1520689216</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>841196800</td></row>
@@ -3779,9 +3788,11 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>841196800</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>841196800</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.NantongYunjiangMach.&amp;Elec.MakingCROP.LTD.com</td><td>0</td><td/><td>841196800</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>Nantong Yunjiang Mach.&amp;Elec.Making CROP.LTD</td><td>0</td><td/><td>841196800</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.NantongYunjiangMach.&amp;Elec.MakingCROP.LTD.com</td><td>0</td><td/><td>-769448504</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>Nantong Yunjiang Mach.&amp;Elec.Making CROP.LTD</td><td>0</td><td/><td>-769448504</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>841162080</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.exe</td><td>0</td><td/><td>-769398743</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>LAUNCH~1.EXE|Launch ThetaMessager.vshost.exe</td><td>0</td><td/><td>1520638048</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>841196800</td></row>
 	</table>
 
@@ -3890,9 +3901,19 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ThetaMessager.exe1_B07E21518A4B42938F6011D10BF28D31.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
 		<row><td>ThetaMessager.exe1_FEE670C36B714E789AE84388E72F20C7.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
+		<row><td>ThetaMessager.exe_207BD47228EB46D1B12A03D7ABF4B62E.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
+		<row><td>ThetaMessager.exe_65561EED368A4C6294A614BE1676FA9B.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
+		<row><td>ThetaMessager.exe_ACF1CE1DA34342AE8DB4C69527D64875.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
 		<row><td>ThetaMessager.exe_CF2228BF967240FC8D9EE31B09FE6F0F.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
+		<row><td>ThetaMessager.exe_DF4EEA726BB746A8842EC4E0EEE75DE7.exe</td><td/><td>C:\Users\Ranger\Documents\Visual Studio 2013\Projects\ThetaMessager\ThetaMessager\bin\Release\ThetaMessager.exe</td><td>0</td></row>
+		<row><td>ThetaMessager.vsho_3164C01930984922A08CE854629EB77A.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>ThetaMessager.vsho_382DD89851864438B60AB93DFC672DBB.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>ThetaMessager.vsho_80EE6DF0546241EB8D63E9177FF49E27.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>ThetaMessager.vsho_8F6CFFA4D98D4382819BB4569F630F13.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>ThetaMessager.vsho_BC5DC2C3F25E494FAB2BB98978E82A16.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>ThetaMessager.vsho_C9D9D2046F234D359E7C5A37D4C13DF7.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4025,7 +4046,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{0A4ADCF4-03D3-435D-9C1D-71E2E5D3B355}</td></row>
 		<row><td>ISUSSignature</td><td>{324939F3-F82E-46C2-83C3-C1DDC05AF019}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewISToday</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4476,8 +4497,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>ThetaMessager.exe</td><td/><td>nanton_1.ltd_nantong_yunjiang_mach._elec.making_crop.ltd</td><td>2</td></row>
-		<row><td>FileKey2</td><td>ThetaMessager.exe</td><td/><td>thetam_1_thetamessagersetup</td><td>2</td></row>
 		<row><td>ThetaMessager.exe</td><td>ThetaMessager.exe</td><td/><td>thetam_1_thetamessagersetup</td><td>2</td></row>
 		<row><td>ThetaMessager.vshost.exe</td><td>ThetaMessager.vshost.exe</td><td/><td>thetam_1_thetamessagersetup</td><td>2</td></row>
 	</table>
@@ -4565,9 +4584,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>ThetaMessager.exe</td><td>thetam_1_thetamessagersetup</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>ThetaMessager.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.exe_CF2228BF967240FC8D9EE31B09FE6F0F.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>ThetaMessager.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>ThetaMessager.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.exe1_FEE670C36B714E789AE84388E72F20C7.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>ThetaMessager.vshost.exe</td><td>thetam_1_thetamessagersetup</td><td>##IDS_SHORTCUT_DISPLAY_NAME2##</td><td>ThetaMessager.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.vsho_382DD89851864438B60AB93DFC672DBB.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ThetaMessager.exe</td><td>thetam_1_thetamessagersetup</td><td>##IDS_SHORTCUT_DISPLAY_NAME9##</td><td>ThetaMessager.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.exe_65561EED368A4C6294A614BE1676FA9B.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ThetaMessager.vshost.exe</td><td>thetam_1_thetamessagersetup</td><td>##IDS_SHORTCUT_DISPLAY_NAME10##</td><td>ThetaMessager.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.vsho_80EE6DF0546241EB8D63E9177FF49E27.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ThetaMessager.vshost.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME10##</td><td>ThetaMessager.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ThetaMessager.vsho_8F6CFFA4D98D4382819BB4569F630F13.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

@@ -155,6 +155,10 @@
     <Content Include="Config\application-env.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\log.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Config\map-info.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -36,6 +36,7 @@
             this.btcAdd = new System.Windows.Forms.Button();
             this.btcUpdate = new System.Windows.Forms.Button();
             this.btcDelete = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbcCommand
@@ -51,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(110, 29);
+            this.label1.Location = new System.Drawing.Point(110, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 1;
@@ -60,7 +61,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(110, 56);
+            this.label2.Location = new System.Drawing.Point(110, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
@@ -68,21 +69,21 @@
             // 
             // tbcName
             // 
-            this.tbcName.Location = new System.Drawing.Point(169, 26);
+            this.tbcName.Location = new System.Drawing.Point(169, 38);
             this.tbcName.Name = "tbcName";
             this.tbcName.Size = new System.Drawing.Size(180, 21);
             this.tbcName.TabIndex = 3;
             // 
             // tbcContent
             // 
-            this.tbcContent.Location = new System.Drawing.Point(169, 53);
+            this.tbcContent.Location = new System.Drawing.Point(169, 65);
             this.tbcContent.Name = "tbcContent";
             this.tbcContent.Size = new System.Drawing.Size(180, 21);
             this.tbcContent.TabIndex = 4;
             // 
             // btcAdd
             // 
-            this.btcAdd.Location = new System.Drawing.Point(112, 85);
+            this.btcAdd.Location = new System.Drawing.Point(112, 97);
             this.btcAdd.Name = "btcAdd";
             this.btcAdd.Size = new System.Drawing.Size(75, 23);
             this.btcAdd.TabIndex = 5;
@@ -92,7 +93,7 @@
             // 
             // btcUpdate
             // 
-            this.btcUpdate.Location = new System.Drawing.Point(193, 85);
+            this.btcUpdate.Location = new System.Drawing.Point(193, 97);
             this.btcUpdate.Name = "btcUpdate";
             this.btcUpdate.Size = new System.Drawing.Size(75, 23);
             this.btcUpdate.TabIndex = 6;
@@ -102,7 +103,7 @@
             // 
             // btcDelete
             // 
-            this.btcDelete.Location = new System.Drawing.Point(274, 85);
+            this.btcDelete.Location = new System.Drawing.Point(274, 97);
             this.btcDelete.Name = "btcDelete";
             this.btcDelete.Size = new System.Drawing.Size(75, 23);
             this.btcDelete.TabIndex = 7;
@@ -110,11 +111,22 @@
             this.btcDelete.UseVisualStyleBackColor = true;
             this.btcDelete.Click += new System.EventHandler(this.btcDelete_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(138, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(185, 12);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "如需改动指令请事先咨询维护人员";
+            // 
             // CommandForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 137);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btcDelete);
             this.Controls.Add(this.btcUpdate);
             this.Controls.Add(this.btcAdd);
@@ -144,5 +156,6 @@
         private System.Windows.Forms.Button btcAdd;
         private System.Windows.Forms.Button btcUpdate;
         private System.Windows.Forms.Button btcDelete;
+        private System.Windows.Forms.Label label3;
     }
 }

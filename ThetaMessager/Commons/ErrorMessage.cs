@@ -31,5 +31,7 @@ namespace ThetaMessager.Commons
         public static string OLD_PASSWORD_IS_WRONG = "旧密码不正确请重新输入";
 
         public static string PASSWORD_SET_SUCCESS = "密码重置成功";
+
+        public static string OPERATION_TIMEOUT = "操作超时";
     }
 }
