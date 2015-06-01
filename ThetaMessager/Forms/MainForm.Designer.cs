@@ -49,9 +49,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbComPort = new System.Windows.Forms.ComboBox();
             this.dgvForSendings = new System.Windows.Forms.DataGridView();
-            this.SelectState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpMapEdit = new System.Windows.Forms.TabPage();
             this.dgvForEdit = new System.Windows.Forms.DataGridView();
             this.colNameForEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +66,10 @@
             this.dtpLog = new System.Windows.Forms.DateTimePicker();
             this.cmStripMapEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbControlMap)).BeginInit();
             this.menuStrip.SuspendLayout();
@@ -272,7 +273,8 @@
             this.dgvForSendings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelectState,
             this.colName,
-            this.colNumber});
+            this.colNumber,
+            this.colState});
             this.dgvForSendings.Location = new System.Drawing.Point(603, 7);
             this.dgvForSendings.Name = "dgvForSendings";
             this.dgvForSendings.RowHeadersVisible = false;
@@ -280,26 +282,6 @@
             this.dgvForSendings.Size = new System.Drawing.Size(204, 150);
             this.dgvForSendings.TabIndex = 1;
             this.dgvForSendings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvForSendings_CellContentClick);
-            // 
-            // SelectState
-            // 
-            this.SelectState.HeaderText = "全选";
-            this.SelectState.Name = "SelectState";
-            this.SelectState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SelectState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "终端名称";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colNumber
-            // 
-            this.colNumber.HeaderText = "终端号码";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Visible = false;
             // 
             // tpMapEdit
             // 
@@ -455,6 +437,35 @@
             this.cmiAdd.Text = "新增节点";
             this.cmiAdd.Click += new System.EventHandler(this.cmiAdd_Click);
             // 
+            // SelectState
+            // 
+            this.SelectState.HeaderText = "全选";
+            this.SelectState.Name = "SelectState";
+            this.SelectState.ReadOnly = true;
+            this.SelectState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelectState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.SelectState.Width = 40;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "终端名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 80;
+            // 
+            // colNumber
+            // 
+            this.colNumber.HeaderText = "终端号码";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Visible = false;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "终端状态";
+            this.colState.Name = "colState";
+            this.colState.Width = 80;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -532,6 +543,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn SelectState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colState;
 
     }
 }

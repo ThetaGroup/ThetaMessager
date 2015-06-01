@@ -163,6 +163,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="logo128.ico" />
+    <Content Include="Resources\greypin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\bpin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

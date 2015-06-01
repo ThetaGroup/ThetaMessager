@@ -25,7 +25,9 @@ namespace ThetaMessager
         private static string ORANGE_PIN = "opin";
         private static string RED_PIN = "rpin";
         private static string YELLOW_PIN = "ypin";
+        private static string BLACK_PIN = "bpin";
         private static string SMALL_ICON = "logo32";
+        private static string GREY_PIN = "greypin";
 
         private XmlDocument nodeConfigDoc = null;
         private XmlDocument appConfigDoc = null;
@@ -44,7 +46,10 @@ namespace ThetaMessager
         private static String nodeNumberProp = "number";
         private static String nodeLocationXProp = "locationX";
         private static String nodeLocationYProp = "locationY";
-        private static String OPEN_CALL_BACK_TAG = "opened";
+
+        private static Dictionary<String, String> OPEN_CALL_MAP = new Dictionary<String, String>() { { "8F9351FA53E30030FF1A517395ED", "离线" }, { "8F9351FA53E30030FF1A542F52A8", "待命" }, { "IOOP6,2", "锁定" }, { "IOOH0", "待命" }, { "IOOP2,2", "报警中" }, { "IOOP3,2", "报警中" }, { "IOOP4,2", "报警中" }, { "IOOP5,2", "报警中" }, { "IOOP1,2", "待命" }, { "IOOL0", "锁定" }, { "IOOP7,2", "离线" } };
+        
+        private static String OPEN_CALL_INIT_STATE = "未知";
 
         private string nowDate = null;
         private string logContent = "";
@@ -55,10 +60,13 @@ namespace ThetaMessager
         private NodeButton editCurrentNodeButton = null;
         private List<NodeButton> controlNodeButtonList = null;
         private List<bool> dgvStateList = null;
-        private Image gpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREEN_PIN)));
-        private Image opinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(ORANGE_PIN)));
-        private Image rpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(RED_PIN)));
-        private Image ypinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(YELLOW_PIN)));
+        private static Image gpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREEN_PIN)));
+        private static Image opinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(ORANGE_PIN)));
+        private static Image rpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(RED_PIN)));
+        private static Image ypinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(YELLOW_PIN)));
+        private static Image bpinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(BLACK_PIN)));
+        private static Image greypinImage = ((Image)((new ComponentResourceManager(typeof(MainForm))).GetObject(GREY_PIN)));
+        private static Dictionary<String, Image> IMAGE_MAP = new Dictionary<string, Image>() { { "未知", bpinImage }, { "离线", greypinImage }, { "锁定", opinImage }, { "待命", gpinImage }, { "报警中", rpinImage } };
         private Icon icon = ((System.Drawing.Icon)(new ComponentResourceManager(typeof(MainForm))).GetObject(SMALL_ICON));
 
         private static string newLine = "\n";
@@ -172,14 +180,14 @@ namespace ThetaMessager
                     int locationY = int.Parse(node.Attributes[nodeLocationYProp].Value);
                     Point point = new Point(locationX, locationY);
 
-                    NodeButton nodeButton = new NodeButton(point, gpinImage, btEditNode_Click);
+                    NodeButton nodeButton = new NodeButton(point, bpinImage, btEditNode_Click);
                     nodeButton.setInfo(name, number, point);
                     this.addNodeButton(nodeButton);
 
                     this.dgvStateList.Add(false);
                    
                     this.dgvForEdit.Rows.Add(new string[2] { name, number });
-                    this.dgvForSendings.Rows.Add(new object[3] { 0, name, number });
+                    this.dgvForSendings.Rows.Add(new object[4] { 0, name, number,OPEN_CALL_INIT_STATE });
                     
                 }                
                 
@@ -219,7 +227,7 @@ namespace ThetaMessager
         private void cmiAdd_Click(object sender, EventArgs e)
         {
             Point location=new Point(locationX,locationY);            
-            NodeButton nodeButton = new NodeButton(location, gpinImage, btEditNode_Click);
+            NodeButton nodeButton = new NodeButton(location, bpinImage, btEditNode_Click);
             nodeButton.setInfo(null, null, location);
             this.addNodeButton(nodeButton);                
         }
@@ -249,26 +257,25 @@ namespace ThetaMessager
             {
                 MessageBox.Show(ErrorMessage.ERROR_NODE_HAS_NOT_BEEN_INITIALIZED);
                 return;
-            }
+            }            
             switch (button.selectedState)
             {
                 case 0:
                     button.selectedState = 1;
-                    button.Image = opinImage;
+                    button.Image = ypinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
-                        object value = row.Cells[1].Value;
+                        object value = row.Cells[1].Value;                        
                         if (value != null && value.Equals(nodeName))
-                        {
+                        {                            
                             DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
-                            cbCell.Value = true;
+                            cbCell.Value = true;                            
                             break;
                         }
                     }
                     break;
                 case 1:
                     button.selectedState = 0;
-                    button.Image = gpinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
                         object value = row.Cells[1].Value;
@@ -276,13 +283,13 @@ namespace ThetaMessager
                         {
                             DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
                             cbCell.Value = false;
+                            button.Image = IMAGE_MAP[row.Cells[3].Value.ToString()];
                             break;
                         }
                     };
                     break;
                 case 2:
                     button.selectedState = 3;
-                    button.Image = opinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
                         object value = row.Cells[1].Value;
@@ -290,13 +297,14 @@ namespace ThetaMessager
                         {
                             DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
                             cbCell.Value = false;
+                            button.Image = IMAGE_MAP[row.Cells[3].Value.ToString()];
                             break;
                         }
                     };
                     break;
                 case 3:
                     button.selectedState = 2;
-                    button.Image = rpinImage;
+                    button.Image = ypinImage;
                     foreach (DataGridViewRow row in this.dgvForSendings.Rows)
                     {
                         object value = row.Cells[1].Value;
@@ -310,14 +318,13 @@ namespace ThetaMessager
                     break;
                 case 4:
                     button.selectedState = 0;
-                    button.Image = gpinImage;
                     foreach(DataGridViewRow row in this.dgvForSendings.Rows)
                     {
                         object value = row.Cells[1].Value;
                         if (value != null && value.Equals(nodeName))
                         {
                             DataGridViewCheckBoxCell cbCell = (DataGridViewCheckBoxCell)row.Cells[0];
-                            cbCell.Value = false;
+                            button.Image = IMAGE_MAP[row.Cells[3].Value.ToString()];
                             break;
                         }
                     }
@@ -385,7 +392,7 @@ namespace ThetaMessager
                 this.dgvStateList.Add(false);
           
                 this.dgvForEdit.Rows.Add(new string[2] { nodeButton.name, nodeButton.number });
-                this.dgvForSendings.Rows.Add(new object[3] { 0, nodeButton.name, nodeButton.number });                
+                this.dgvForSendings.Rows.Add(new object[4] { 0, nodeButton.name, nodeButton.number,OPEN_CALL_INIT_STATE });             
             }
 
         }
@@ -486,7 +493,7 @@ namespace ThetaMessager
                     {
                         if (nodeButton.number.Equals(nowNo))
                         {
-                            nodeButton.Image = this.ypinImage;
+                            nodeButton.Image = ypinImage;
                             nodeButton.selectedState = 4;
                             break;
                         }
@@ -560,18 +567,45 @@ namespace ThetaMessager
             string[] messageStringList = ComUtils.listReceivedMessages();
             foreach (string messageString in messageStringList)
             {
+                //MessageBox.Show(messageString);
                 foreach (NodeButton nodeButton in this.controlNodeButtonList)
                 {
                     string number = nodeButton.number;
-                    if (messageString.Contains(number) && messageString.Contains(OPEN_CALL_BACK_TAG))
+                    foreach (String callBackKey in OPEN_CALL_MAP.Keys)
                     {
-                        nodeButton.Image = this.rpinImage;
-                        nodeButton.selectedState = 2;
+                        if (messageString.Contains(number) && messageString.Contains(callBackKey))
+                        {
+                            //nodeButton.Image = this.rpinImage;
+                            //nodeButton.selectedState = 2;                            
+                            this.changeCallBackState(nodeButton.name, OPEN_CALL_MAP[callBackKey]);
+                        }
                     }
                 }
             }
             this.btComSend.Enabled = true;
             this.btStateUpdate.Enabled = true;
+        }
+
+        private void changeCallBackState(String nodeName, String state)
+        {
+            foreach (DataGridViewRow row in this.dgvForSendings.Rows)
+            {                
+                object value = row.Cells[1].Value;
+                if (value != null && value.Equals(nodeName))
+                {
+                    DataGridViewCell cbCell = row.Cells[3];
+                    cbCell.Value = state;
+                    foreach (NodeButton nodeButton in this.controlNodeButtonList)
+                    {
+                        if (nodeName.Equals(nodeButton.name))
+                        {
+                            nodeButton.Image = IMAGE_MAP[state];
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         private void miUser_Click(object sender, EventArgs e)
@@ -632,27 +666,30 @@ namespace ThetaMessager
 
         private void dgvForSendings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (false)
             {
-                bool b = (bool)this.dgvForSendings.Rows[e.RowIndex].Cells[0].EditedFormattedValue;
-                bool remain = this.dgvStateList[e.RowIndex];
-
-                if (b != remain)
+                if (e.ColumnIndex == 0)
                 {
-                    string buttonName = this.dgvForSendings.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    bool b = (bool)this.dgvForSendings.Rows[e.RowIndex].Cells[0].EditedFormattedValue;
+                    bool remain = this.dgvStateList[e.RowIndex];
 
-                    foreach (NodeButton node in this.controlNodeButtonList)
+                    if (b != remain)
                     {
-                        if (node.name.Equals(buttonName))
+                        string buttonName = this.dgvForSendings.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                        foreach (NodeButton node in this.controlNodeButtonList)
                         {
-                            this.btControlNode_Click(node, new EventArgs());
-                            this.dgvStateList[e.RowIndex] = b;
-                            Thread.Sleep(100);
-                            break;
+                            if (node.name.Equals(buttonName))
+                            {
+                                this.btControlNode_Click(node, new EventArgs());
+                                this.dgvStateList[e.RowIndex] = b;
+                                Thread.Sleep(100);
+                                break;
+                            }
                         }
                     }
+
                 }
-       
             }
         }
 
