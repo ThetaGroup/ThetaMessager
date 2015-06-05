@@ -84,6 +84,12 @@
   <ItemGroup>
     <Compile Include="Commons\AtProcess.cs" />
     <Compile Include="Commons\ErrorMessage.cs" />
+    <Compile Include="Forms\ClearCacheForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClearCacheForm.Designer.cs">
+      <DependentUpon>ClearCacheForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CommandForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\SendInfo.cs" />
+    <EmbeddedResource Include="Forms\ClearCacheForm.resx">
+      <DependentUpon>ClearCacheForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommandForm.resx">
       <DependentUpon>CommandForm.cs</DependentUpon>
     </EmbeddedResource>

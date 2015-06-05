@@ -47,7 +47,19 @@ namespace ThetaMessager
         private static String nodeLocationXProp = "locationX";
         private static String nodeLocationYProp = "locationY";
 
-        private static Dictionary<String, String> OPEN_CALL_MAP = new Dictionary<String, String>() { { "8F9351FA53E30030FF1A517395ED", "离线" }, { "8F9351FA53E30030FF1A542F52A8", "待命" }, { "IOOP6,2", "锁定" }, { "IOOH0", "待命" }, { "IOOP2,2", "报警中" }, { "IOOP3,2", "报警中" }, { "IOOP4,2", "报警中" }, { "IOOP5,2", "报警中" }, { "IOOP1,2", "待命" }, { "IOOL0", "锁定" }, { "IOOP7,2", "离线" } };
+        private static Dictionary<String, String> OPEN_CALL_MAP = new Dictionary<String, String>() { 
+            { "8F9351FA53E30030FF1A517395ED", "离线" }, 
+            { "8F9351FA53E30030FF1A542F52A8", "待命" }, 
+            { "IOOP6,2", "锁定" }, {"9004F004F00500036002C0032","锁定"},
+            { "IOOH0", "待命" }, {"9004F004F00480030","待命"},                                   
+            { "IOOP2,2", "报警中" }, { "9004F004F00500032002C0032", "报警中" },                            
+            { "IOOP3,2", "报警中" }, { "9004F004F00500033002C0032", "报警中" },
+            { "IOOP4,2", "报警中" }, { "9004F004F00500034002C0032", "报警中" },
+            { "IOOP5,2", "报警中" }, { "9004F004F00500035002C0032", "报警中" },
+            { "IOOP1,2", "待命" }, { "9004F004F00500031002C0032", "待命" },
+            { "IOOL0", "锁定" }, { "9004F004F004C0030", "锁定" },
+            { "IOOP7,2", "离线" }, { "9004F004F00500037002C0032", "离线" },
+        };
         
         private static String OPEN_CALL_INIT_STATE = "未知";
 
@@ -690,6 +702,19 @@ namespace ThetaMessager
                     }
 
                 }
+            }
+        }
+
+        private void clearCacheToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ComUtils.isInit)
+            {
+                ClearCacheForm clearCacheForm = new ClearCacheForm();
+                clearCacheForm.Show();
+            }
+            else
+            {
+                MessageBox.Show(ErrorMessage.ERROR_COM_NOT_OPEN);
             }
         }
 

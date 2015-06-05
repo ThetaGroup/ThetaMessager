@@ -16,6 +16,7 @@ namespace TheataMessager
         private static string NEW_LINE = "\r\n";
         private static string SEND_CMD = "AT+CMGS=";
         private static string TEST_CMD = "AT+CMGF=1";
+        private static string DELETE_CMD = "AT+CMGD=";
         private static string LIST_CMD = "AT+CMGL=\"REC UNREAD\"";
         private static string OK_RSP = "OK";
         private static string ERROR_RSP = "ERROR";
@@ -25,6 +26,7 @@ namespace TheataMessager
         private static long receivedCount = 0;
         private static int maxRetry = 1000;
         public static StringBuilder builder = new StringBuilder();
+        public static StringBuilder log = new StringBuilder();
 
         private static SerialPort com;
         private static Queue<SendInfo> sendQueue;
@@ -65,6 +67,7 @@ namespace TheataMessager
             string saved = builder.ToString();
             if (saved.Contains(OK_RSP) || saved.Contains(ERROR_RSP)|| saved.Contains(DETAIL_RSP))
             {
+                log.Append(builder);
                 builder.Clear();
             }
             builder.Append(received);
@@ -102,8 +105,8 @@ namespace TheataMessager
         {
             string phoneNo = sendInfo.phoneNo;
             string message = sendInfo.message;
-            
-            tunnelWrite(SEND_CMD+phoneNo);
+
+            tunnelWrite(SEND_CMD+"\""+phoneNo+"\"");
             tunnelWrite(message+CTRLZ);
         }
 
@@ -111,7 +114,13 @@ namespace TheataMessager
         {
             waitForReady();
             com.WriteLine(cmd);
+            log.Append(cmd);
             isReady = false;
+        }
+
+        public static void clearMessage(int i)
+        {
+            tunnelWrite(DELETE_CMD + i);       
         }
 
         public static string[] listReceivedMessages()

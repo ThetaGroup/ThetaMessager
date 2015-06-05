@@ -33,5 +33,8 @@ namespace ThetaMessager.Commons
         public static string PASSWORD_SET_SUCCESS = "密码重置成功";
 
         public static string OPERATION_TIMEOUT = "操作超时";
+
+        public static string ERROR_COM_NOT_OPEN = "COM口未打开";
+        
     }
 }

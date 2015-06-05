@@ -2802,6 +2802,9 @@
   <data name="gpin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\gpin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="greypin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\greypin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="logo128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\logo128.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -2825,8 +2828,5 @@
   </data>
   <data name="ypin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\ypin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="greypin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\greypin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
