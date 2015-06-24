@@ -32,6 +32,7 @@ namespace ThetaMessager
         private XmlDocument nodeConfigDoc = null;
         private XmlDocument appConfigDoc = null;
         private XmlDocument logDoc = null;
+        private bool firstLogging = true;
         private static String nodeConfigPath = Application.StartupPath + "\\Config\\map-info.xml";
         private static String appConfigPath = Application.StartupPath + "\\Config\\application-env.xml";
         private static String logPath = Application.StartupPath + "\\Config\\log.xml";
@@ -636,8 +637,16 @@ namespace ThetaMessager
 
         private void log(string str)
         {
-            this.logContent += "[" + DateTime.Now.ToString() + "]" + str + "|";
-            this.logNode.InnerText += this.logContent;
+            if (firstLogging)
+            {
+                this.logContent = this.logNode.InnerText + this.logContent + "[" + DateTime.Now.ToString() + "]" + str + "|";
+                firstLogging = false;
+            }
+            else
+            {
+                this.logContent += "[" + DateTime.Now.ToString() + "]" + str + "|";
+            }
+            this.logNode.InnerText = this.logContent;            
             this.logDoc.Save(logPath);
         }
 
