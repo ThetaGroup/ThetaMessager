@@ -6,6 +6,7 @@
     <UserInfoNeeded>true</UserInfoNeeded>
   </UserInfo>
   <Commands>
+    <Command name="状态查询">IOOS</Command>
     <Command name="开电源">IOOP6,2</Command>
     <Command name="开锁">IOOH0</Command>
     <Command name="警报中断">IOOP1,2</Command>
@@ -15,6 +16,5 @@
     <Command name="灾警">IOOP5,2</Command>
     <Command name="关锁">IOOL0</Command>
     <Command name="关电源">IOOP7,2</Command>
-    <Command name="状态查询">IOOS</Command>
   </Commands>
 </ThetaMessager>

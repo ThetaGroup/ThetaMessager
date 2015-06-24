@@ -38,6 +38,7 @@
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miFunction = new System.Windows.Forms.ToolStripMenuItem();
             this.miCommand = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tpControl = new System.Windows.Forms.TabPage();
             this.lbAtInfo = new System.Windows.Forms.ListBox();
@@ -49,14 +50,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbComPort = new System.Windows.Forms.ComboBox();
             this.dgvForSendings = new System.Windows.Forms.DataGridView();
-            this.SelectState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpMapEdit = new System.Windows.Forms.TabPage();
             this.dgvForEdit = new System.Windows.Forms.DataGridView();
-            this.colNameForEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNumberForEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelMapEditEditor = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btDelete = new System.Windows.Forms.Button();
@@ -70,7 +65,12 @@
             this.dtpLog = new System.Windows.Forms.DateTimePicker();
             this.cmStripMapEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNameForEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumberForEdit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pbEditMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbControlMap)).BeginInit();
             this.menuStrip.SuspendLayout();
@@ -129,14 +129,14 @@
             // miUser
             // 
             this.miUser.Name = "miUser";
-            this.miUser.Size = new System.Drawing.Size(152, 22);
+            this.miUser.Size = new System.Drawing.Size(124, 22);
             this.miUser.Text = "用户管理";
             this.miUser.Click += new System.EventHandler(this.miUser_Click);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Size = new System.Drawing.Size(124, 22);
             this.miExit.Text = "退出系统";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -152,9 +152,16 @@
             // miCommand
             // 
             this.miCommand.Name = "miCommand";
-            this.miCommand.Size = new System.Drawing.Size(152, 22);
+            this.miCommand.Size = new System.Drawing.Size(124, 22);
             this.miCommand.Text = "指令设置";
             this.miCommand.Click += new System.EventHandler(this.miCommand_Click);
+            // 
+            // clearCacheToolStripMenuItem
+            // 
+            this.clearCacheToolStripMenuItem.Name = "clearCacheToolStripMenuItem";
+            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.clearCacheToolStripMenuItem.Text = "清除缓存";
+            this.clearCacheToolStripMenuItem.Click += new System.EventHandler(this.clearCacheToolStripMenuItem_Click);
             // 
             // tcMain
             // 
@@ -285,35 +292,6 @@
             this.dgvForSendings.TabIndex = 1;
             this.dgvForSendings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvForSendings_CellContentClick);
             // 
-            // SelectState
-            // 
-            this.SelectState.HeaderText = "全选";
-            this.SelectState.Name = "SelectState";
-            this.SelectState.ReadOnly = true;
-            this.SelectState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SelectState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.SelectState.Width = 40;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "终端名称";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 80;
-            // 
-            // colNumber
-            // 
-            this.colNumber.HeaderText = "终端号码";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Visible = false;
-            // 
-            // colState
-            // 
-            this.colState.HeaderText = "终端状态";
-            this.colState.Name = "colState";
-            this.colState.Width = 80;
-            // 
             // tpMapEdit
             // 
             this.tpMapEdit.Controls.Add(this.dgvForEdit);
@@ -340,16 +318,6 @@
             this.dgvForEdit.RowTemplate.Height = 23;
             this.dgvForEdit.Size = new System.Drawing.Size(203, 318);
             this.dgvForEdit.TabIndex = 9;
-            // 
-            // colNameForEdit
-            // 
-            this.colNameForEdit.HeaderText = "终端名称";
-            this.colNameForEdit.Name = "colNameForEdit";
-            // 
-            // colNumberForEdit
-            // 
-            this.colNumberForEdit.HeaderText = "终端号码";
-            this.colNumberForEdit.Name = "colNumberForEdit";
             // 
             // panelMapEditEditor
             // 
@@ -468,12 +436,47 @@
             this.cmiAdd.Text = "新增节点";
             this.cmiAdd.Click += new System.EventHandler(this.cmiAdd_Click);
             // 
-            // clearCacheToolStripMenuItem
+            // SelectState
             // 
-            this.clearCacheToolStripMenuItem.Name = "clearCacheToolStripMenuItem";
-            this.clearCacheToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clearCacheToolStripMenuItem.Text = "清除缓存";
-            this.clearCacheToolStripMenuItem.Click += new System.EventHandler(this.clearCacheToolStripMenuItem_Click);
+            this.SelectState.HeaderText = "全选";
+            this.SelectState.Name = "SelectState";
+            this.SelectState.ReadOnly = true;
+            this.SelectState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelectState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.SelectState.Width = 40;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "终端名称";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 80;
+            // 
+            // colNumber
+            // 
+            this.colNumber.HeaderText = "终端号码";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Visible = false;
+            // 
+            // colState
+            // 
+            this.colState.HeaderText = "终端状态";
+            this.colState.Name = "colState";
+            this.colState.ReadOnly = true;
+            this.colState.Width = 80;
+            // 
+            // colNameForEdit
+            // 
+            this.colNameForEdit.HeaderText = "终端名称";
+            this.colNameForEdit.Name = "colNameForEdit";
+            this.colNameForEdit.ReadOnly = true;
+            // 
+            // colNumberForEdit
+            // 
+            this.colNumberForEdit.HeaderText = "终端号码";
+            this.colNumberForEdit.Name = "colNumberForEdit";
+            this.colNumberForEdit.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -541,19 +544,19 @@
         private System.Windows.Forms.Button btStateUpdate;
         private System.Windows.Forms.ListBox lbAtInfo;
         private System.Windows.Forms.DataGridView dgvForEdit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNameForEdit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberForEdit;
         private System.Windows.Forms.ToolStripMenuItem miUser;
         private System.Windows.Forms.ToolStripMenuItem miCommand;
         private System.Windows.Forms.TabPage tpLog;
         private System.Windows.Forms.DateTimePicker dtpLog;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox rtbLog;
+        private System.Windows.Forms.ToolStripMenuItem clearCacheToolStripMenuItem;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SelectState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colState;
-        private System.Windows.Forms.ToolStripMenuItem clearCacheToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNameForEdit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumberForEdit;
 
     }
 }

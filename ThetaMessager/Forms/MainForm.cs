@@ -473,8 +473,8 @@ namespace ThetaMessager
                 {
                     MessageBox.Show(ErrorMessage.ERROR_MESSAGE_SEND_INFO_IS_NOT_ENOUGH);
                 }
-                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_START + (this.dgvForSendings.Rows.Count - 1));
-                log(AtProcess.COM_MESSAGE_QUEUE_START + (this.dgvForSendings.Rows.Count - 1));
+                this.lbAtInfo.Items.Add(AtProcess.COM_MESSAGE_QUEUE_START);
+                log(AtProcess.COM_MESSAGE_QUEUE_START);
 
                 string sendingText = this.cmdMap[this.cbSentText.Text];
                 foreach (DataGridViewRow row in this.dgvForSendings.Rows)
@@ -612,6 +612,8 @@ namespace ThetaMessager
                         if (nodeName.Equals(nodeButton.name))
                         {
                             nodeButton.Image = IMAGE_MAP[state];
+                            DataGridViewCheckBoxCell cbCell0 = (DataGridViewCheckBoxCell)row.Cells[0];
+                            cbCell0.Value = false;
                             break;
                         }
                     }
@@ -635,7 +637,7 @@ namespace ThetaMessager
         private void log(string str)
         {
             this.logContent += "[" + DateTime.Now.ToString() + "]" + str + "|";
-            this.logNode.InnerText = this.logContent;
+            this.logNode.InnerText += this.logContent;
             this.logDoc.Save(logPath);
         }
 
